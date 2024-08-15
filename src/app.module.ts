@@ -9,13 +9,14 @@ import { BoardsModule } from './boards/boards.module';
   imports: [
     TypeOrmModule.forRoot({
       type: 'mysql',
-      host: 'localhost',
+      host: '127.0.0.1',
       port: 3306,
       username: 'root',
-      password: 'password',
-      database: 'my_database',
+      password: '',
+      database: 'board',
       entities: [__dirname + '/**/*.entity{.ts,.js}'],
       synchronize: true,
+      logging: true,
     }),
     AuthModule,
     UsersModule,
