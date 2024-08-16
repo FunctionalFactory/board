@@ -4,7 +4,7 @@ import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
 @Entity()
 export class Board {
   @PrimaryGeneratedColumn('increment')
-  number: number;
+  id: number;
   @Column()
   writer: string;
   @Column()
