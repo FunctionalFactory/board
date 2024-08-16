@@ -11,6 +11,5 @@
 ## TODO LIST
 
 - board: 수정/삭제
-- detail: 조회
-- comment: 조회/수정/삭제
-- reply_comment: 조회/수정/삭제
+- comment: 수정/삭제
+- reply_comment: 수정/삭제
