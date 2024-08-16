@@ -1,14 +1,14 @@
 import { PassportStrategy } from '@nestjs/passport';
 import { ExtractJwt, Strategy } from 'passport-jwt';
+import { ConfigService } from '@nestjs/config';
+import { Injectable } from '@nestjs/common';
 
-export class JwtAccessStrategy extends PassportStrategy(
-  Strategy,
-  '나만의인가',
-) {
-  constructor() {
+@Injectable()
+export class JwtAccessStrategy extends PassportStrategy(Strategy, 'jwt') {
+  constructor(private readonly configService: ConfigService) {
     super({
       jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
-      secretOrKey: '나의 비밀번호',
+      secretOrKey: configService.get<string>('JWT_SECRET'),
     });
   }
 
