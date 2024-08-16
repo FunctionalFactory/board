@@ -1,4 +1,5 @@
-import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
+import { Reply } from 'src/replies/entities/reply.entity';
+import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
 
 @Entity()
 export class Board {
@@ -10,4 +11,7 @@ export class Board {
   title: string;
   @Column()
   contents: string;
+
+  @OneToMany(() => Reply, (reply) => reply.board)
+  replies: Reply[];
 }
