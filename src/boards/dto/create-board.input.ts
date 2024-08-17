@@ -10,3 +10,9 @@ export class CreateBoardInput {
   @IsString()
   contents: string;
 }
+
+export class UpdateBoardInput {
+  title: string;
+  contents: string;
+}
+
