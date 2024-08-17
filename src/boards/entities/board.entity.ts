@@ -3,7 +3,7 @@ import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
 @Entity()
 export class Board {
   @PrimaryGeneratedColumn('increment')
-  number: number;
+  id: number;
   @Column()
   writer: string;
   @Column()
