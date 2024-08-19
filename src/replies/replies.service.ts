@@ -1,11 +1,13 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { Reply } from './entities/reply.entity';
 import { Board } from 'src/boards/entities/board.entity';
 import {
   IRepliesServiceCreate,
+  IRepliesServiceDelete,
   IRepliesServiceFindReplies,
+  IRepliesServiceUpdate,
 } from './interfaces/replies.service.interface';
 
 @Injectable()
@@ -46,5 +48,25 @@ export class RepliesService {
 
     await this.repliesRepository.save(newReply);
     return '댓글이 성공적으로 등록되었습니다.';
+  }
+
+  async update({ id, updateReplyInput }: IRepliesServiceUpdate): Promise<string> {
+    const reply = await this.findReplyById(id);
+    if (!reply) {
+      throw new NotFoundException(`Reply with ID "${id}" not found`);
+    }
+    
+    await this.repliesRepository.update(id, updateReplyInput);
+    return '댓글이 성공적으로 수정되었습니다.';
+  }
+
+  async delete({ id }: IRepliesServiceDelete): Promise<string> {
+    const reply = await this.findReplyById(id);
+    if (!reply) {
+      throw new NotFoundException(`Reply with ID "${id}" not found`);
+    }
+    
+    await this.repliesRepository.remove(reply);
+    return '댓글이 성공적으로 삭제되었습니다.';
   }
 }
